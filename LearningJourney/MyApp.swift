@@ -1,9 +1,11 @@
 import SwiftUI
 
-@main struct MyApp: App {
+@main   // نقطة البداية، مثل main() في Java
+struct MyApp: App {
     var body: some Scene {
         WindowGroup {
-            OnboardingView()
+            ContentView()
+                .preferredColorScheme(.dark)   // التطبيق كله Dark
         }
     }
 }
