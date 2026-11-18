@@ -40,12 +40,12 @@ struct TimeframePicker: View {
                         .fontWeight(.medium)
                         // Sizes taken from the Sketch design.
                         .padding(.horizontal, 20)
-                        .padding(.vertical, 14)
+                        .padding(.vertical, 12)   // buttons are 46 tall in the design
                         .foregroundStyle(isSelected ? .white : .gray)
                         // Liquid Glass capsule: orange when selected, clear when not.
                         // .interactive(): the glass reacts when the user touches it.
                         .glassEffect(
-                            .regular.tint(isSelected ? .orange : .clear).interactive(),
+                            .regular.tint(isSelected ? Color(red: 1.0, green: 0.573, blue: 0.188) : .clear).interactive(),
                             in: .capsule
                         )
                 }

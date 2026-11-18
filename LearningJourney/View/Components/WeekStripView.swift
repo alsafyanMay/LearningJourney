@@ -12,30 +12,23 @@
 import SwiftUI
 
 // A reusable Component. It does not know about the ViewModel.
-// It gets the days and a way to ask for each day's status.
 struct WeekStripView: View {
-
     // The 7 days of the current week.
     let days: [Date]
 
-    // A closure that takes a day and returns its status.
-    // It returns an Optional: nil means the day was not logged.
-    // ActivityView gives us this closure, and inside it asks the ViewModel.
+    // A closure that takes a day and returns its status (nil = not logged).
     let status: (Date) -> DayStatus?
 
     var body: some View {
-        HStack {
-            // One column for each day.
-            // id: \.self tells SwiftUI each date is unique.
+        HStack(spacing: 0) {
             ForEach(days, id: \.self) { date in
-                VStack(spacing: 8) {
-
-                    // The first letter of the day name, for example "S" for Sunday.
+                VStack(spacing: 4) {
+                    // The first letter of the day name, for example "S".
                     Text(date.formatted(.dateTime.weekday(.narrow)))
-                        .font(.caption)
-                        .foregroundStyle(.gray)
+                        .font(.footnote.weight(.semibold))   // SF Pro 13 semibold
+                        .foregroundStyle(.primary)
 
-                    // The day number in a colored circle (another Component).
+                    // The day number in a colored circle.
                     DayCircle(date: date, status: status(date))
                 }
                 .frame(maxWidth: .infinity)   // all 7 columns take equal width

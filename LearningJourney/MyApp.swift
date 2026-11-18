@@ -4,8 +4,7 @@ import SwiftUI
 struct MyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .preferredColorScheme(.dark)   // التطبيق كله Dark
+            ContentView()   // the colors follow the device setting (Light or Dark)
         }
     }
 }
