@@ -28,13 +28,6 @@
 - **Goal end**: when the timeframe ends, the app shows "Well done!" or "Not met", and you can start again with the same goal or set a new one.
 - **Saved progress**: your goal and your days are stored on the device.
 
-## Design
-
-The interface follows the Sketch design (dark mode, SF Pro, Liquid Glass):
-
-- Orange `#FF9230` for learned days and the main button.
-- Blue `#3CD3FE` for freezed days and the freeze button.
-- Liquid Glass buttons, cards and circles using `glassEffect`.
 
 ## Tech
 
@@ -43,18 +36,7 @@ The interface follows the Sketch design (dark mode, SF Pro, Liquid Glass):
 - MVVM architecture
 - Observation (`@Observable`)
 
-## Project Structure
 
-```
-LearningJourney/
-├── Model/        Goal, DayStatus, Timeframe, GoalState, SavedProgress, ProgressStore
-├── View/         Screens: Splash, Onboarding, Activity, Calendar, UpdateGoal
-│   └── Components/   DayCircle, WeekStripView, StatCard, GoalForm, TimeframePicker, GoalEndView, CustomAlert
-├── ViewModel/    Activity, Calendar, Onboarding and UpdateGoal view models
-└── Assets.xcassets   Colors and the flame image
-```
-
-The views only draw. All the rules (what can be logged, when a goal ends, how many freezes are left) live in the view models.
 
 ## Getting Started
 
