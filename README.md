@@ -38,10 +38,14 @@ The interface follows the Sketch design (dark mode, SF Pro, Liquid Glass):
 
 ## Tech
 
-- Swift and SwiftUI
-- Liquid Glass (`glassEffect`, `glassProminent`)
-- MVVM architecture
-- Observation (`@Observable`)
+| | Tool | What we used it for |
+|:---:|:---|:---|
+| <img src="https://img.shields.io/badge/-Sketch-F7B500?style=for-the-badge&logo=sketch&logoColor=white" height="28"> | **Sketch** | Designing the screens and the app icon |
+| <img src="https://img.shields.io/badge/-Xcode-147EFB?style=for-the-badge&logo=xcode&logoColor=white" height="28"> | **Xcode** | Building, running and testing the app |
+| <img src="https://img.shields.io/badge/-Swift-F05138?style=for-the-badge&logo=swift&logoColor=white" height="28"> | **Swift** | The programming language |
+| <img src="https://img.shields.io/badge/-SwiftUI-0D96F6?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjE0IiBoZWlnaHQ9IjE0IiByeD0iNCIgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuNTUiLz48cmVjdCB4PSI4IiB5PSI4IiB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHJ4PSI0IiBmaWxsPSIjZmZmIi8%2BPC9zdmc%2B" height="28"> | **SwiftUI** | Building the interface (with Liquid Glass) |
+
+The app follows the MVVM architecture and uses Observation (`@Observable`).
 
 ## Project Structure
 
