@@ -43,7 +43,7 @@ struct SplashView: View {
     var body: some View {
         // ZStack: puts views on top of each other (background, lights, then the card).
         ZStack {
-            Color.black
+            Color(.systemBackground)
                 .ignoresSafeArea()
 
             blobs

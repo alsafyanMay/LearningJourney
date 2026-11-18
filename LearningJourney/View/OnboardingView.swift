@@ -24,7 +24,7 @@ struct OnboardingView: View {
     let onStart: (Goal) -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 35) {
+        VStack(alignment: .leading, spacing: 37) {   // 37 between the subtitle and the form, from the design
             header
 
             // The shared form. We pass bindings ($) so the form can change the ViewModel's values.
@@ -42,39 +42,43 @@ struct OnboardingView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: 80) {
             Image("streak")   // the flame image from Assets
-                .padding(.top, 60)
+                .padding(.top, 57)
                 .frame(maxWidth: .infinity)
 
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 4) {
                 // **Learner** is Markdown: it makes this word bold.
                 Text("Hello **Learner**")
                     .font(.largeTitle)
                 Text("This app will help you learn everyday!")
-                    .font(.subheadline)
-                    .foregroundStyle(.gray)
+                    .font(.body)                       // SF Pro 17
+                    .foregroundStyle(Color(white: 0.6))   // #999999 from the design
             }
         }
     }
 
     // The "Start Learning" button and the small note under it.
     private var startSection: some View {
-        VStack {
+        VStack(spacing: 12) {
             Button {
                 // Create the Goal in the ViewModel, then send it to ContentView.
                 onStart(viewModel.makeGoal())
             } label: {
                 Text("Start Learning")
-                    .fontWeight(.medium)
-                    .padding(.horizontal, 20)
+                    .font(.body.weight(.medium))      // SF Pro 17 medium
+                    .foregroundStyle(viewModel.canStart ? .white : .gray)
+                    .frame(width: 165, height: 54)    // a bit bigger than the design (151 × 46)
+                    // Liquid Glass capsule: orange #FF9230, or dark gray until the user types something.
+                    .glassEffect(
+                        .regular.tint(viewModel.canStart ? Color(red: 1.0, green: 0.573, blue: 0.188) : Color.appMutedFill).interactive(),
+                        in: .capsule
+                    )
             }
-            .buttonStyle(.glassProminent)     // Liquid Glass button from the system
-            .tint(.orange)
-            .controlSize(.large)
-            .disabled(!viewModel.canStart)    // gray and not tappable until the user types something
+            .buttonStyle(.plain)
+            .disabled(!viewModel.canStart)    // not tappable until the user types something
 
             Text("You can edit your desire later")
-                .font(.footnote)
-                .foregroundStyle(.gray)
+                .font(.caption)                       // SF Pro 12
+                .foregroundStyle(Color(white: 0.6))   // #999999 from the design
         }
         .frame(maxWidth: .infinity)
     }

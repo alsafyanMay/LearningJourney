@@ -23,22 +23,26 @@ struct GoalForm: View {
     @Binding var cycle: Timeframe
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 35) {
+        // Spacing and sizes taken from the Sketch design.
+        VStack(alignment: .leading, spacing: 30) {
 
             // "I want to learn" + the text field + a line under it.
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text("I want to learn")
+                    .font(.callout)   // SF Pro 16
+                    .padding(.bottom, 5)
                 // "Swift" is the placeholder (gray hint text), not a real value.
                 // $desire: we pass the binding, because the text field needs to write into it.
                 TextField("Swift", text: $desire)
                     .autocorrectionDisabled()   // no auto-correct or suggestions while typing
+                    .frame(height: 48)          // the field is 48 tall in the design
                 Divider()
             }
 
             // "I want to learn it in a" + the Week / Month / Year buttons.
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 13) {
                 Text("I want to learn it in a")
-                    .font(.subheadline)
+                    .font(.callout)   // SF Pro 16
                 // We pass the same binding down again, so the picker can change it.
                 TimeframePicker(selection: $cycle)
             }

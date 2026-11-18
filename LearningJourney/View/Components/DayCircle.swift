@@ -6,53 +6,50 @@
 //
 //  What this file does:
 //  Draws one day number inside a circle.
-//  The color shows what happened on that day:
-//  orange = learned, blue = freezed, solid orange = today (not logged yet).
-//  Used by WeekStripView on the Activity screen.
+//  Orange text = learned, blue text = freezed, solid orange = today (not logged yet).
+//  Used by WeekStripView and CalendarView.
 //
 
 import SwiftUI
 
-// A small reusable piece of UI (a Component).
-// It does not know where the data comes from. It just draws what it is given.
+// A reusable Component. It just draws what it is given.
 struct DayCircle: View {
-
-    // The day to show.
     let date: Date
 
-    // What happened on that day.
     // Optional: nil means the day was not logged.
     let status: DayStatus?
 
     var body: some View {
-        // The day number only, for example "17".
         Text(date.formatted(.dateTime.day()))
-            .fontWeight(.medium)
+            .font(.title3.weight(weight))
             .foregroundStyle(colors.text)
-            .frame(width: 36, height: 36)
+            .frame(width: 44, height: 44)
             .background(colors.background, in: .circle)
     }
 
-    // The text color and the circle color, returned together.
-    // A tuple: a quick way to return two values without making a new type.
-    // Colors live here in the View, not in the Model, because the Model does not know SwiftUI.
+    // Today (not logged yet) is Semibold, learned days are Medium, other days Regular.
+    private var weight: Font.Weight {
+        if status == nil {
+            return Calendar.current.isDateInToday(date) ? .semibold : .regular
+        }
+        return .medium
+    }
+
+    // The text color and the circle color, returned together (a tuple).
     private var colors: (text: Color, background: Color) {
+        let softOrange = Color(red: 1.0, green: 0.573, blue: 0.188)   // #FF9230
+        let skyBlue = Color(red: 0.235, green: 0.827, blue: 0.996)    // #3CD3FE
+
         switch status {
-
-        // Learned day: orange text on a light orange circle.
         case .learned:
-            return (.orange, .orange.opacity(0.25))
-
-        // Freezed day: blue text on a light blue circle.
+            return (softOrange, softOrange.opacity(0.12))  // orange text on dark brown
         case .freezed:
-            return (.cyan, .cyan.opacity(0.25))
-
-        // Not logged (nil): highlight today in solid orange, leave other days plain.
+            return (skyBlue, skyBlue.opacity(0.12))        // blue text on dark blue
         case nil:
             if Calendar.current.isDateInToday(date) {
-                return (.white, .orange)
+                return (.white, softOrange)                // today: solid orange
             }
-            return (.white, .clear)
+            return (.primary, .clear)                        // other days: plain
         }
     }
 }

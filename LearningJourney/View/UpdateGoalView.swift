@@ -22,6 +22,9 @@ struct UpdateGoalView: View {
     // so it lives here in the View, not in the ViewModel.
     @State private var isShowingAlert = false
 
+    // Did the user tap "Update" in the alert? (Dismiss leaves it false.)
+    @State private var didConfirm = false
+
     // @Environment: a value SwiftUI gives us.
     // dismiss closes this screen and goes back to the Activity screen.
     @Environment(\.dismiss) private var dismiss
@@ -38,7 +41,8 @@ struct UpdateGoalView: View {
             GoalForm(desire: $viewModel.desire, cycle: $viewModel.cycle)
             Spacer()
         }
-        .padding()
+        .padding(.horizontal)
+        .padding(.top, 36)   // the form starts 36 below the navigation bar in the design
         .navigationTitle("Learning Goal")
         .navigationBarTitleDisplayMode(.inline)   // small title in the middle of the bar
 
@@ -46,32 +50,69 @@ struct UpdateGoalView: View {
         .toolbar {
             ToolbarItem(placement: .confirmationAction) {
                 Button {
-                    isShowingAlert = true   // show the alert first, do not update yet
+                    // Show the alert first, do not update yet. No slide animation: the alert just appears.
+                    didConfirm = false
+                    var transaction = Transaction()
+                    transaction.disablesAnimations = true
+                    withTransaction(transaction) {
+                        isShowingAlert = true
+                    }
                 } label: {
                     Image(systemName: "checkmark")
                 }
                 .buttonStyle(.glassProminent)   // Liquid Glass button in the toolbar
-                .tint(.orange)
+                .tint(Color(red: 1.0, green: 0.573, blue: 0.188))   // #FF9230 from the design
                 .disabled(!viewModel.canSave)   // disabled if the text is empty
             }
         }
 
-        // The confirmation alert.
-        // isPresented is a binding: when isShowingAlert becomes true the alert shows,
-        // and when the alert closes SwiftUI sets it back to false.
-        .alert("Update goal", isPresented: $isShowingAlert) {
-
-            // role: .cancel gives this button the standard cancel look and position.
-            // It does nothing, so the real goal stays the same.
-            Button("Dismiss", role: .cancel) { }
-
-            // Apply the draft to the real goal, then go back to the Activity screen.
-            Button("Update") {
+        // The confirmation alert. We use a full screen cover so the dark overlay
+        // also covers the navigation bar, like in the design.
+        // onDismiss runs after the cover is gone: only then do we apply the update and go back.
+        .fullScreenCover(isPresented: $isShowingAlert, onDismiss: {
+            if didConfirm {
                 viewModel.confirmUpdate()
                 dismiss()
             }
-        } message: {
-            Text("If you update now, your streak will start over.")
+        }) {
+            alertOverlay
+                .presentationBackground(.clear)   // see the screen behind through the overlay
+        }
+    }
+
+    // MARK: - Alert
+
+    // The dark overlay with the alert card, from the Sketch design.
+    private var alertOverlay: some View {
+        ZStack {
+            // #121212 at 56% in Dark, from the design.
+            Color.appOverlay
+                .ignoresSafeArea()
+
+            // The card starts 372 points from the top of the screen in the design.
+            VStack(spacing: 0) {
+                CustomAlert(
+                    title: "Update goal",
+                    message: "If you update now, your streak will start over.",
+                    cancelTitle: "Dismiss",
+                    confirmTitle: "Update",
+                    onCancel: { closeAlert(confirmed: false) },
+                    onConfirm: { closeAlert(confirmed: true) }
+                )
+                Spacer(minLength: 0)
+            }
+            .padding(.top, 372)
+            .ignoresSafeArea()
+        }
+    }
+
+    // Closes the cover without the slide animation. The action itself runs in onDismiss above.
+    private func closeAlert(confirmed: Bool) {
+        didConfirm = confirmed
+        var transaction = Transaction()
+        transaction.disablesAnimations = true
+        withTransaction(transaction) {
+            isShowingAlert = false
         }
     }
 }
