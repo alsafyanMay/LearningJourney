@@ -32,11 +32,15 @@
 ## Tech
 
 <p align="center">
-  <img src="docs/icons/sketch.svg" height="26" align="absmiddle" alt="Sketch">&nbsp;&nbsp;<b>Sketch</b>&nbsp;<sub>design</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="docs/icons/xcode.svg" height="26" align="absmiddle" alt="Xcode">&nbsp;&nbsp;<b>Xcode</b>&nbsp;<sub>build</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="docs/icons/swift.svg" height="26" align="absmiddle" alt="Swift">&nbsp;&nbsp;<b>Swift</b>&nbsp;<sub>language</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="docs/icons/swiftui.svg" height="26" align="absmiddle" alt="SwiftUI">&nbsp;&nbsp;<b>SwiftUI</b>&nbsp;<sub>interface</sub>
+  <img src="docs/icons/sketch.svg" height="44" alt="Sketch" title="Sketch">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="docs/icons/xcode.svg" height="44" alt="Xcode" title="Xcode">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="docs/icons/swift.svg" height="44" alt="Swift" title="Swift">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="docs/icons/swiftui.svg" height="44" alt="SwiftUI" title="SwiftUI">
 </p>
 
 <p align="center">
-  <sub>MVVM architecture · Observation (<code>@Observable</code>) · Liquid Glass</sub>
+  Sketch &nbsp;·&nbsp; Xcode &nbsp;·&nbsp; Swift &nbsp;·&nbsp; SwiftUI
+</p>
+
+<p align="center">
+  <sub>MVVM &nbsp;·&nbsp; Observation &nbsp;·&nbsp; Liquid Glass</sub>
 </p>
 
 ## Getting Started
