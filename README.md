@@ -46,4 +46,4 @@
 
 ## Author
 
-Made by May as a learning project at Apple Developer Academy.
+May Mohammed || may.mohammed1@outlook.com
